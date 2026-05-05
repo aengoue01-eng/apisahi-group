@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-beige: #F5F0E8;
+    --color-beige-dark: #E8E0D0;
+    --color-black: #1A1A1A;
+    --color-gold: #C9A84C;
+    --color-gold-light: #E2C97E;
+    --color-gold-dark: #A6852A;
+    --color-green: #7A9E7E;
+    --color-green-light: #A8C5AB;
+    --color-text-muted: #6B6B6B;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-py {
+    @apply py-16 md:py-24;
+  }
+
+  .gold-underline {
+    @apply relative inline-block;
+  }
+
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-gold;
+  }
+
+  .btn-primary {
+    @apply bg-gold text-white font-medium px-6 py-3 rounded-sm
+           hover:bg-gold-dark transition-all duration-300
+           inline-flex items-center gap-2 text-sm tracking-wide uppercase;
+  }
+
+  .btn-outline {
+    @apply border border-gold text-gold font-medium px-6 py-3 rounded-sm
+           hover:bg-gold hover:text-white transition-all duration-300
+           inline-flex items-center gap-2 text-sm tracking-wide uppercase;
+  }
+
+  .btn-outline-white {
+    @apply border border-white text-white font-medium px-6 py-3 rounded-sm
+           hover:bg-white hover:text-noir transition-all duration-300
+           inline-flex items-center gap-2 text-sm tracking-wide uppercase;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+}
+
+/* Swiper overrides */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.6) !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #C9A84C !important;
+  width: 28px !important;
+  border-radius: 5px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #C9A84C !important;
+}
+
+/* Flip card 3D */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  inset: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-beige-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
