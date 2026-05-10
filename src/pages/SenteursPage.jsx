@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import 'swiper/css/effect-fade'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import PageWrapper from '@/components/layout/PageWrapper'
 import SenteursNavbar from '@/components/senteurs/SenteursNavbar'
@@ -9,6 +15,31 @@ import toast from 'react-hot-toast'
 
 const GOLD = '#C9A84C'
 const GOLD_LIGHT = '#E2C97E'
+
+/* ── SLIDES HERO ── */
+const SLIDES = [
+  {
+    id: 1,
+    bg: 'linear-gradient(160deg, #0A0600 0%, #1A1000 50%, #000 100%)',
+    tag: "L'art des senteurs africaines",
+    title: "Senteurs d'Afrique",
+    sub: "Des créations olfactives uniques inspirées de l'âme du continent",
+  },
+  {
+    id: 2,
+    bg: 'linear-gradient(160deg, #000 0%, #0D0A00 40%, #0A0600 100%)',
+    tag: 'Collections exclusives',
+    title: "L'élégance en chaque fragrance",
+    sub: 'Transformez vos espaces en véritables havres de raffinement',
+  },
+  {
+    id: 3,
+    bg: 'linear-gradient(160deg, #050300 0%, #100800 50%, #000 100%)',
+    tag: 'Expérience sensorielle',
+    title: "Chaque fragrance raconte une histoire",
+    sub: "Découvrez nos packs Découverte, Ambiance et Signature",
+  },
+]
 
 const PACKS = [
   {
@@ -39,14 +70,15 @@ const VALEURS = [
 ]
 
 const GALLERY_ITEMS = [
-  { id: 1, alt: 'Bougie artisanale Senteurs d\'Afrique', aspect: '1/1' },
-  { id: 2, alt: 'Collection encens', aspect: '4/5' },
-  { id: 3, alt: 'Diffuseur signature', aspect: '16/9' },
-  { id: 4, alt: 'Fragrance d\'ambiance', aspect: '1/1' },
-  { id: 5, alt: 'Rituel olfactif', aspect: '4/5' },
-  { id: 6, alt: 'Pack découverte', aspect: '1/1' },
+  { id: 1, alt: "Bougie artisanale", aspect: '1/1' },
+  { id: 2, alt: "Collection encens", aspect: '4/5' },
+  { id: 3, alt: "Diffuseur signature", aspect: '16/9' },
+  { id: 4, alt: "Fragrance d'ambiance", aspect: '1/1' },
+  { id: 5, alt: "Rituel olfactif", aspect: '4/5' },
+  { id: 6, alt: "Pack découverte", aspect: '1/1' },
 ]
 
+/* ── COMPOSANTS UTILITAIRES ── */
 function FadeIn({ children, delay = 0, className = '' }) {
   const { ref, inView, variants } = useScrollAnimation()
   return (
@@ -57,12 +89,15 @@ function FadeIn({ children, delay = 0, className = '' }) {
   )
 }
 
-function GoldLine({ width = 60, vertical = false }) {
-  if (vertical) return <div style={{ width: '1px', height: `${width}px`, background: `linear-gradient(180deg, transparent, ${GOLD})` }} />
-  return <div style={{ width: `${width}px`, height: '1px', background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)` }} />
+function GoldDivider() {
+  return (
+    <div className="flex justify-center my-8">
+      <div style={{ width: '60px', height: '1px', background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)` }} />
+    </div>
+  )
 }
 
-/* ───────── FORMULAIRE DE CONTACT ───────── */
+/* ── FORMULAIRE DE CONTACT ── */
 function SenteursContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [loading, setLoading] = useState(false)
@@ -70,7 +105,9 @@ function SenteursContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) {
-      toast.error('Veuillez remplir tous les champs.', { style: { background: '#0A0800', color: '#E2C97E', border: `1px solid ${GOLD}40` } })
+      toast.error('Veuillez remplir tous les champs.', {
+        style: { background: '#0A0800', color: '#E2C97E', border: `1px solid ${GOLD}40` },
+      })
       return
     }
     setLoading(true)
@@ -85,9 +122,15 @@ function SenteursContactForm() {
   }
 
   const inputStyle = {
-    width: '100%', background: 'rgba(255,255,255,0.03)', border: `1px solid ${GOLD}25`,
-    color: 'white', padding: '12px 16px', fontSize: '14px', outline: 'none',
-    borderRadius: '2px', transition: 'border-color 0.2s',
+    width: '100%',
+    background: 'rgba(255,255,255,0.03)',
+    border: `1px solid ${GOLD}25`,
+    color: 'white',
+    padding: '12px 16px',
+    fontSize: '14px',
+    outline: 'none',
+    borderRadius: '2px',
+    transition: 'border-color 0.2s',
     fontFamily: "'Inter', sans-serif",
   }
 
@@ -123,7 +166,7 @@ function SenteursContactForm() {
         />
       </div>
       <button type="submit" disabled={loading}
-        className="w-full py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 disabled:opacity-60"
+        className="w-full py-4 text-sm font-bold tracking-widest uppercase transition-opacity duration-200 disabled:opacity-60"
         style={{ background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}>
         {loading ? 'Envoi en cours...' : 'Envoyer le message'}
       </button>
@@ -131,88 +174,85 @@ function SenteursContactForm() {
   )
 }
 
-/* ───────── PAGE PRINCIPALE ───────── */
+/* ══════════════════════════════════════════════════════════
+   PAGE PRINCIPALE
+══════════════════════════════════════════════════════════ */
 export default function SenteursPage() {
   return (
     <PageWrapper>
       <SenteursNavbar />
 
-      {/* ══ HERO ══ */}
-      <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #000 0%, #0D0A00 60%, #000 100%)' }}>
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'repeating-linear-gradient(0deg,#C9A84C 0,#C9A84C 1px,transparent 0,transparent 80px),repeating-linear-gradient(90deg,#C9A84C 0,#C9A84C 1px,transparent 0,transparent 80px)' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10"
-          style={{ background: 'radial-gradient(circle, #C9A84C 0%, transparent 70%)' }} />
+      {/* ══ HERO — CAROUSEL ══ */}
+      <section id="hero" style={{ height: '100vh' }}>
+        <Swiper
+          modules={[Autoplay, Pagination, Navigation, EffectFade]}
+          effect="fade"
+          autoplay={{ delay: 5500, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+          navigation
+          loop
+          style={{ height: '100%' }}
+        >
+          {SLIDES.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <div
+                className="relative w-full h-full flex items-center justify-center text-center overflow-hidden"
+                style={{ background: slide.bg }}
+              >
+                {/* Grille dorée subtile */}
+                <div className="absolute inset-0 opacity-[0.04]"
+                  style={{ backgroundImage: 'repeating-linear-gradient(0deg,#C9A84C 0,#C9A84C 1px,transparent 0,transparent 80px),repeating-linear-gradient(90deg,#C9A84C 0,#C9A84C 1px,transparent 0,transparent 80px)' }} />
+                {/* Halo */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+                  style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)' }} />
 
-        <div className="relative z-10 px-4 flex flex-col items-center">
-          <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.34, 1.2, 0.64, 1] }} className="mb-10">
-            <img src="/images/senteurs/logo.jpg" alt="Senteurs d'Afrique"
-              className="w-48 h-48 md:w-64 md:h-64 object-contain rounded-2xl"
-              onError={(e) => {
-                e.target.style.display = 'none'
-                e.target.nextSibling.style.display = 'flex'
-              }}
-            />
-            <div className="hidden w-48 h-48 md:w-64 md:h-64 items-center justify-center rounded-2xl border"
-              style={{ borderColor: `${GOLD}40`, background: '#0A0800' }}>
-              <p className="font-heading text-5xl font-bold" style={{ color: GOLD }}>SA</p>
-            </div>
-          </motion.div>
-
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xs tracking-[0.5em] uppercase mb-4" style={{ color: GOLD }}>
-            Une collection d'exception
-          </motion.p>
-
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.7 }}
-            className="font-heading text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
-            style={{ fontFamily: "'Playfair Display', serif" }}>
-            Senteurs d'Afrique
-          </motion.h1>
-
-          <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.8, duration: 0.8 }}
-            className="mb-6 mx-auto" style={{ width: '80px', height: '1px', background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)` }} />
-
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.6 }}
-            className="text-lg md:text-xl max-w-xl leading-relaxed mb-12"
-            style={{ color: 'rgba(255,255,255,0.65)', fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}>
-            "Chaque fragrance raconte une histoire, évoque une émotion et sublime votre intérieur avec authenticité."
-          </motion.p>
-
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.5 }}
-            className="flex flex-col sm:flex-row items-center gap-4">
-            <a href="#collections" className="px-8 py-3.5 text-sm font-semibold tracking-widest uppercase transition-all duration-300"
-              style={{ background: `linear-gradient(135deg, ${GOLD} 0%, #A6852A 100%)`, color: '#000', borderRadius: '2px' }}>
-              Découvrir les collections
-            </a>
-            <a href="#contact" className="px-8 py-3.5 text-sm font-semibold tracking-widest uppercase border transition-all duration-300 hover:bg-white/5"
-              style={{ borderColor: `${GOLD}60`, color: GOLD_LIGHT, borderRadius: '2px' }}>
-              Commander
-            </a>
-          </motion.div>
-        </div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2">
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
-            <svg width="20" height="20" fill="none" stroke={GOLD} strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </motion.div>
-        </motion.div>
+                {/* Contenu slide */}
+                <div className="relative z-10 px-6 max-w-4xl mx-auto">
+                  <p className="text-xs tracking-[0.5em] uppercase mb-6" style={{ color: GOLD }}>
+                    {slide.tag}
+                  </p>
+                  <h1
+                    className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
+                    {slide.title}
+                  </h1>
+                  <div className="flex justify-center mb-6">
+                    <div style={{ width: '80px', height: '1px', background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)` }} />
+                  </div>
+                  <p className="text-base md:text-lg mb-10 max-w-xl mx-auto"
+                    style={{ color: 'rgba(255,255,255,0.65)', fontStyle: 'italic', fontFamily: "'Playfair Display', serif" }}>
+                    {slide.sub}
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#collections"
+                      className="px-8 py-3.5 text-sm font-semibold tracking-widest uppercase transition-opacity hover:opacity-80"
+                      style={{ background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}>
+                      Découvrir les collections
+                    </a>
+                    <a href="#contact"
+                      className="px-8 py-3.5 text-sm font-semibold tracking-widest uppercase border transition-all hover:bg-white/5"
+                      style={{ borderColor: `${GOLD}60`, color: GOLD_LIGHT, borderRadius: '2px' }}>
+                      Commander
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
       {/* ══ INTRODUCTION ══ */}
       <section style={{ background: '#080500', padding: '96px 0' }}>
         <div className="max-w-5xl mx-auto px-6 text-center">
           <FadeIn>
-            <p className="text-xs tracking-[0.4em] uppercase mb-6" style={{ color: GOLD }}>Notre univers</p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-8"
+            <p className="text-xs tracking-[0.4em] uppercase mb-4" style={{ color: GOLD }}>Notre univers</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white"
               style={{ fontFamily: "'Playfair Display', serif" }}>
               L'âme de l'Afrique en chaque senteur
             </h2>
-            <div className="mx-auto mb-10"><GoldLine /></div>
+            <GoldDivider />
             <p className="text-base md:text-lg leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>
               Senteurs d'Afrique fait vibrer vos sens à travers des créations olfactives uniques, inspirées de l'âme,
               de la richesse et de l'élégance africaine.<br /><br />
@@ -229,7 +269,9 @@ export default function SenteursPage() {
             {VALEURS.map((v, i) => (
               <FadeIn key={v.titre} delay={i * 0.15}>
                 <div className="text-center">
-                  <div className="mx-auto mb-6 flex justify-center"><GoldLine vertical width={48} /></div>
+                  <div className="flex justify-center mb-6">
+                    <div style={{ width: '1px', height: '48px', background: `linear-gradient(180deg, transparent, ${GOLD})` }} />
+                  </div>
                   <h3 className="font-heading text-xl font-semibold mb-4"
                     style={{ color: GOLD_LIGHT, fontFamily: "'Playfair Display', serif" }}>{v.titre}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>{v.texte}</p>
@@ -250,13 +292,14 @@ export default function SenteursPage() {
                 style={{ fontFamily: "'Playfair Display', serif" }}>
                 Choisissez votre expérience
               </h2>
-              <div className="mx-auto mt-6"><GoldLine /></div>
+              <GoldDivider />
             </div>
           </FadeIn>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {PACKS.map((pack, i) => (
               <FadeIn key={pack.name} delay={i * 0.12}>
-                <div className="flex flex-col h-full p-8 transition-all duration-500 relative"
+                <div className="flex flex-col h-full p-8 relative transition-all duration-500"
                   style={{
                     background: pack.featured ? 'linear-gradient(160deg,#1A1200,#0D0900)' : 'rgba(255,255,255,0.02)',
                     border: pack.featured ? `1px solid ${GOLD}60` : `1px solid rgba(255,255,255,0.07)`,
@@ -286,7 +329,7 @@ export default function SenteursPage() {
                       ))}
                     </ul>
                     <a href="#contact"
-                      className="block text-center py-3 text-xs font-bold tracking-[0.3em] uppercase transition-all duration-300"
+                      className="block text-center py-3 text-xs font-bold tracking-[0.3em] uppercase transition-opacity hover:opacity-80"
                       style={pack.featured
                         ? { background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }
                         : { border: `1px solid ${GOLD}40`, color: GOLD_LIGHT, borderRadius: '2px' }}>
@@ -310,7 +353,7 @@ export default function SenteursPage() {
                 style={{ fontFamily: "'Playfair Display', serif" }}>
                 L'élégance en images
               </h2>
-              <div className="mx-auto mt-6"><GoldLine /></div>
+              <GoldDivider />
             </div>
           </FadeIn>
 
@@ -320,16 +363,14 @@ export default function SenteursPage() {
                 <div className="break-inside-avoid group relative overflow-hidden cursor-pointer"
                   style={{ borderRadius: '4px', border: `1px solid ${GOLD}15` }}>
                   <div className="w-full flex items-center justify-center"
-                    style={{ aspectRatio: item.aspect, background: `linear-gradient(135deg, #0D0900, #1A1200)` }}>
+                    style={{ aspectRatio: item.aspect, background: 'linear-gradient(135deg, #0D0900, #1A1200)' }}>
                     <div className="text-center">
                       <div className="mx-auto mb-3" style={{ width: '24px', height: '1px', background: `${GOLD}60` }} />
-                      <p className="text-xs tracking-widest" style={{ color: `${GOLD}50` }}>
-                        {item.alt}
-                      </p>
+                      <p className="text-xs tracking-widest" style={{ color: `${GOLD}50` }}>{item.alt}</p>
                     </div>
                   </div>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                    style={{ background: 'rgba(0,0,0,0.6)' }}>
+                    style={{ background: 'rgba(0,0,0,0.5)' }}>
                     <div style={{ width: '32px', height: '1px', background: GOLD }} />
                   </div>
                 </div>
@@ -337,8 +378,8 @@ export default function SenteursPage() {
             ))}
           </div>
           <FadeIn>
-            <p className="text-center text-xs tracking-widest mt-12" style={{ color: `${GOLD}40` }}>
-              * Les photos de vos créations viendront enrichir cette galerie
+            <p className="text-center text-xs tracking-widest mt-10" style={{ color: `${GOLD}35`, fontStyle: 'italic' }}>
+              Vos photos de créations viendront enrichir cette galerie
             </p>
           </FadeIn>
         </div>
@@ -354,27 +395,25 @@ export default function SenteursPage() {
                 style={{ fontFamily: "'Playfair Display', serif" }}>
                 Commandez ou posez vos questions
               </h2>
-              <div className="mx-auto mt-6"><GoldLine /></div>
+              <GoldDivider />
             </div>
           </FadeIn>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            {/* Formulaire */}
             <FadeIn className="lg:col-span-3">
               <div className="p-8" style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${GOLD}20`, borderRadius: '4px' }}>
                 <SenteursContactForm />
               </div>
             </FadeIn>
 
-            {/* Infos */}
             <FadeIn className="lg:col-span-2" delay={0.1}>
               <div className="space-y-8">
                 <div>
-                  <h3 className="font-heading text-xl font-semibold text-white mb-4"
+                  <h3 className="font-heading text-xl font-semibold text-white mb-6"
                     style={{ fontFamily: "'Playfair Display', serif" }}>
                     Nos coordonnées
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     {[
                       { label: 'E-mail', val: 'contact@apisahigroup.com' },
                       { label: 'WhatsApp', val: '+225 XX XX XX XX XX' },
@@ -382,20 +421,22 @@ export default function SenteursPage() {
                     ].map((info) => (
                       <div key={info.label}>
                         <p className="text-xs tracking-widest uppercase mb-1" style={{ color: GOLD }}>{info.label}</p>
-                        <p className="text-sm text-white/60">{info.val}</p>
+                        <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>{info.val}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div style={{ borderTop: `1px solid ${GOLD}15`, paddingTop: '32px' }}>
-                  <p className="text-xs leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.3)', fontStyle: 'italic' }}>
+                  <p className="text-xs leading-relaxed mb-6"
+                    style={{ color: 'rgba(255,255,255,0.3)', fontStyle: 'italic', fontFamily: "'Playfair Display', serif" }}>
                     "Une invitation sensorielle à travers des créations olfactives raffinées, inspirées de l'Afrique."
                   </p>
-                  <Link to="/" className="inline-flex items-center gap-2 text-xs tracking-widest uppercase"
-                    style={{ color: `${GOLD}50` }}
+                  <Link to="/"
+                    className="inline-flex items-center gap-2 text-xs tracking-widest uppercase transition-colors duration-200"
+                    style={{ color: `${GOLD}45` }}
                     onMouseEnter={(e) => e.currentTarget.style.color = GOLD}
-                    onMouseLeave={(e) => e.currentTarget.style.color = `${GOLD}50`}>
+                    onMouseLeave={(e) => e.currentTarget.style.color = `${GOLD}45`}>
                     <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                     </svg>

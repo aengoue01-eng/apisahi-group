@@ -34,139 +34,163 @@ export default function SenteursNavbar() {
   const opaque = scrolled || menuOpen
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        background: opaque ? 'rgba(5,3,0,0.97)' : 'transparent',
-        backdropFilter: opaque ? 'blur(12px)' : 'none',
-        borderBottom: opaque ? `1px solid ${GOLD}18` : 'none',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+    <>
+      {/* ── HEADER ── */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          background: opaque ? 'rgba(5,3,0,0.97)' : 'transparent',
+          backdropFilter: opaque ? 'blur(12px)' : 'none',
+          borderBottom: opaque ? `1px solid ${GOLD}20` : 'none',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
 
-        {/* Logo Senteurs */}
-        <button onClick={() => scrollTo('#hero')} className="flex items-center gap-3 focus:outline-none">
-          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border"
-            style={{ borderColor: `${GOLD}40` }}>
-            <img
-              src="/images/senteurs/logo.jpg"
-              alt="Senteurs d'Afrique"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.style.display = 'none'
-                e.target.parentElement.innerHTML = `<span style="font-family:'Playfair Display',serif;color:${GOLD};font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;width:100%;height:100%">SA</span>`
+          {/* Logo */}
+          <button onClick={() => scrollTo('#hero')} className="flex items-center gap-3 focus:outline-none">
+            <div
+              className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border"
+              style={{ borderColor: `${GOLD}40` }}
+            >
+              <img
+                src="/images/senteurs/logo.jpg"
+                alt="Senteurs d'Afrique"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.parentElement.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:${GOLD};font-weight:700;font-size:13px">SA</div>`
+                }}
+              />
+            </div>
+            <div className="hidden sm:block text-left">
+              <p className="font-heading font-bold text-white text-base leading-none"
+                style={{ fontFamily: "'Playfair Display', serif" }}>
+                Senteurs
+              </p>
+              <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>d'Afrique</p>
+            </div>
+          </button>
+
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {LINKS.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollTo(link.href)}
+                className="text-sm font-medium tracking-wide relative group"
+                style={{ color: 'rgba(255,255,255,0.75)', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = GOLD}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.75)'}
+              >
+                {link.label}
+                <span
+                  className="absolute -bottom-1 left-0 h-px transition-all duration-300 w-0 group-hover:w-full"
+                  style={{ background: GOLD }}
+                />
+              </button>
+            ))}
+          </nav>
+
+          {/* CTA desktop */}
+          <div className="hidden lg:flex items-center gap-3">
+            <button
+              onClick={() => scrollTo('#contact')}
+              className="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-opacity duration-200 hover:opacity-80"
+              style={{ background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}
+            >
+              Commander
+            </button>
+            <Link
+              to="/"
+              className="px-4 py-2.5 text-xs font-medium tracking-wider uppercase border transition-all duration-200 hover:bg-white/5"
+              style={{ borderColor: `${GOLD}25`, color: 'rgba(255,255,255,0.35)', borderRadius: '2px' }}
+            >
+              ← APISAHI
+            </Link>
+          </div>
+
+          {/* Hamburger mobile */}
+          <button
+            className="lg:hidden flex flex-col justify-center gap-1.5 p-2 z-10"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Menu"
+          >
+            <span
+              className="block w-6 h-px transition-all duration-300"
+              style={{
+                background: menuOpen ? GOLD : 'white',
+                transform: menuOpen ? 'rotate(45deg) translate(0px, 6px)' : 'none',
               }}
             />
-          </div>
-          <div className="hidden sm:block text-left">
-            <p className="font-heading font-bold text-white text-base leading-none"
-              style={{ fontFamily: "'Playfair Display', serif" }}>
-              Senteurs
-            </p>
-            <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>d'Afrique</p>
-          </div>
-        </button>
-
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => scrollTo(link.href)}
-              className="text-sm font-medium tracking-wide transition-colors duration-200 relative group"
-              style={{ color: 'rgba(255,255,255,0.75)' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = GOLD}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.75)'}
-            >
-              {link.label}
-              <span
-                className="absolute -bottom-1 left-0 h-px transition-all duration-300 w-0 group-hover:w-full"
-                style={{ background: GOLD }}
-              />
-            </button>
-          ))}
-        </nav>
-
-        {/* CTA + retour */}
-        <div className="hidden lg:flex items-center gap-3">
-          <button
-            onClick={() => scrollTo('#contact')}
-            className="px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-300"
-            style={{
-              background: `linear-gradient(135deg, ${GOLD}, #A6852A)`,
-              color: '#000',
-              borderRadius: '2px',
-            }}
-          >
-            Commander
+            <span
+              className="block w-6 h-px transition-all duration-300"
+              style={{ background: menuOpen ? GOLD : 'white', opacity: menuOpen ? 0 : 1 }}
+            />
+            <span
+              className="block w-6 h-px transition-all duration-300"
+              style={{
+                background: menuOpen ? GOLD : 'white',
+                transform: menuOpen ? 'rotate(-45deg) translate(0px, -6px)' : 'none',
+              }}
+            />
           </button>
-          <Link
-            to="/"
-            className="px-4 py-2.5 text-xs font-medium tracking-wider uppercase border transition-all duration-200 hover:bg-white/5"
-            style={{ borderColor: `${GOLD}30`, color: 'rgba(255,255,255,0.4)', borderRadius: '2px' }}
-          >
-            ← APISAHI
-          </Link>
         </div>
+      </header>
 
-        {/* Hamburger mobile */}
-        <button
-          className="lg:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Menu"
-        >
-          <span className="block w-6 h-px transition-all duration-300"
-            style={{ background: opaque ? GOLD : 'white', transform: menuOpen ? 'rotate(45deg) translate(4px, 4px)' : 'none' }} />
-          <span className="block w-6 h-px transition-all duration-300"
-            style={{ background: opaque ? GOLD : 'white', opacity: menuOpen ? 0 : 1 }} />
-          <span className="block w-6 h-px transition-all duration-300"
-            style={{ background: opaque ? GOLD : 'white', transform: menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'none' }} />
-        </button>
-      </div>
-
-      {/* Menu mobile */}
+      {/* ── MENU MOBILE — rendu en dehors du header pour éviter les conflits de z-index ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col pt-24 px-8"
+            transition={{ type: 'tween', duration: 0.32 }}
+            className="fixed inset-0 z-[60] flex flex-col px-8 pt-28 pb-10"
             style={{ background: '#050300' }}
           >
-            <nav className="flex flex-col gap-6">
-              {LINKS.map((link) => (
-                <button
+            {/* Trait déco haut */}
+            <div className="mb-8" style={{ height: '1px', background: `linear-gradient(90deg, ${GOLD}40, transparent)` }} />
+
+            <nav className="flex flex-col gap-0 flex-1">
+              {LINKS.map((link, i) => (
+                <motion.button
                   key={link.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * i, duration: 0.25 }}
                   onClick={() => scrollTo(link.href)}
-                  className="font-heading text-2xl font-semibold text-left border-b pb-4 transition-colors duration-200"
-                  style={{ color: 'rgba(255,255,255,0.8)', borderColor: `${GOLD}20`, fontFamily: "'Playfair Display', serif" }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = GOLD}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}
+                  className="font-heading text-2xl font-semibold text-left py-5 border-b"
+                  style={{
+                    color: 'rgba(255,255,255,0.85)',
+                    borderColor: `${GOLD}15`,
+                    fontFamily: "'Playfair Display', serif",
+                  }}
                 >
                   {link.label}
-                </button>
+                </motion.button>
               ))}
+            </nav>
+
+            <div className="mt-8 space-y-3">
+              <button
+                onClick={() => scrollTo('#contact')}
+                className="w-full py-4 text-sm font-bold tracking-widest uppercase"
+                style={{ background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}
+              >
+                Commander
+              </button>
               <Link
                 to="/"
                 onClick={() => setMenuOpen(false)}
-                className="text-sm mt-2"
-                style={{ color: 'rgba(255,255,255,0.3)' }}
+                className="flex items-center justify-center gap-2 py-3 text-xs tracking-widest uppercase"
+                style={{ color: 'rgba(255,255,255,0.25)', border: `1px solid rgba(255,255,255,0.08)`, borderRadius: '2px' }}
               >
                 ← Retour APISAHI Group
               </Link>
-            </nav>
-            <button
-              onClick={() => scrollTo('#contact')}
-              className="mt-8 py-4 text-sm font-bold tracking-widest uppercase"
-              style={{ background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}
-            >
-              Commander
-            </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   )
 }
