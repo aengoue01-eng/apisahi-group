@@ -651,6 +651,18 @@
         </div>
       </div>
     </div>
+
+    <div class="toc-section">
+      <p class="toc-section-title">Pages autonomes des marques</p>
+      <div class="toc-item">
+        <div class="toc-row">
+          <span class="num" style="background:linear-gradient(135deg,#C9A84C,#A6852A)">16</span>
+          <span class="text">Pages autonomes — Senteurs d'Afrique & Rituel de Beauté</span>
+          <span class="dots"></span>
+          <span class="page-num">§ 16</span>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -709,9 +721,10 @@
           <tr><th>Élément</th><th>Détail</th></tr>
         </thead>
         <tbody>
-          <tr><td>Nombre de pages</td><td>6 pages (Accueil, Groupe, Univers, Offres, Galerie, Contact)</td></tr>
+          <tr><td>Nombre de pages</td><td>8 pages (Accueil, Groupe, Univers, Offres, Galerie, Contact + 2 pages autonomes)</td></tr>
+          <tr><td>Pages autonomes</td><td>/senteurs (Senteurs d'Afrique) et /rituel (Rituel de Beauté) — layout dédié</td></tr>
           <tr><td>Nombre de filiales</td><td>4 (ZEYA, LALOU Box, Senteurs d'Afrique, Rituel de Beauté)</td></tr>
-          <tr><td>Nombre de packs/services</td><td>18 packs au total</td></tr>
+          <tr><td>Nombre de packs/services</td><td>18 packs au total + 9 produits par page autonome</td></tr>
           <tr><td>Langue</td><td>Français (site monolingue)</td></tr>
           <tr><td>Type de rendu</td><td>SPA (Single Page Application) — React côté client</td></tr>
           <tr><td>Backend</td><td>Aucun (site vitrine, formulaire simulé)</td></tr>
@@ -953,9 +966,19 @@
 │   │   │   ├── <span class="file">GalleryGrid.jsx</span>
 │   │   │   └── <span class="file">Lightbox.jsx</span>
 │   │   │
-│   │   └── <span class="folder">contact/</span>
-│   │       ├── <span class="file">ContactForm.jsx</span>
-│   │       └── <span class="file">ContactInfo.jsx</span>
+│   │   ├── <span class="folder">contact/</span>
+│   │   │   ├── <span class="file">ContactForm.jsx</span>
+│   │   │   └── <span class="file">ContactInfo.jsx</span>
+│   │   │
+│   │   ├── <span class="folder">senteurs/</span>                  <span class="comment-ft"># Composants exclusifs Senteurs d'Afrique</span>
+│   │   │   ├── <span class="file">SenteursNavbar.jsx</span>     <span class="comment-ft"># Navbar noire/dorée, ancres one-page</span>
+│   │   │   ├── <span class="file">SenteursFooter.jsx</span>     <span class="comment-ft"># Footer noir avec socials</span>
+│   │   │   └── <span class="file">SenteursLoadingScreen.jsx</span> <span class="comment-ft"># Écran "SA" doré sur fond noir</span>
+│   │   │
+│   │   └── <span class="folder">rituel/</span>                    <span class="comment-ft"># Composants exclusifs Rituel de Beauté</span>
+│   │       ├── <span class="file">RituelNavbar.jsx</span>       <span class="comment-ft"># Navbar plum/rose, boutons arrondis</span>
+│   │       ├── <span class="file">RituelFooter.jsx</span>       <span class="comment-ft"># Footer plum avec socials</span>
+│   │       └── <span class="file">RituelLoadingScreen.jsx</span>   <span class="comment-ft"># Écran "RB" rose sur fond plum</span>
 │   │
 │   └── <span class="folder">pages/</span>
 │       ├── <span class="file">HomePage.jsx</span>
@@ -963,7 +986,9 @@
 │       ├── <span class="file">UniversPage.jsx</span>
 │       ├── <span class="file">OffersPage.jsx</span>
 │       ├── <span class="file">GalleryPage.jsx</span>
-│       └── <span class="file">ContactPage.jsx</span>
+│       ├── <span class="file">ContactPage.jsx</span>
+│       ├── <span class="file">SenteursPage.jsx</span>       <span class="comment-ft"># One-page autonome Senteurs d'Afrique</span>
+│       └── <span class="file">RituelPage.jsx</span>         <span class="comment-ft"># One-page autonome Rituel de Beauté</span>
 │
 ├── <span class="file">index.html</span>                         <span class="comment-ft"># Entrée HTML + Google Fonts</span>
 ├── <span class="file">vite.config.js</span>                     <span class="comment-ft"># Config Vite (alias @, port 3000)</span>
@@ -1037,6 +1062,26 @@
       </div>
     </div>
 
+    <div class="route-card" style="border-left: 4px solid #C9A84C;">
+      <span class="route-path" style="background:rgba(201,168,76,0.12); color:#A6852A;">/senteurs</span>
+      <div class="route-info">
+        <p class="route-name">Senteurs d'Afrique — SenteursPage <span style="background:#C9A84C;color:#000;font-size:10px;padding:2px 7px;border-radius:20px;margin-left:8px;font-weight:700">AUTONOME</span></p>
+        <p class="route-desc">Page one-page dédiée avec sa propre navbar (liens ancres), footer, écran de chargement et 6 sections : Hero carousel (3 slides), Introduction, Valeurs, Produits e-commerce (9 produits), Galerie, Contact. Fond noir/doré — charte Senteurs d'Afrique.</p>
+      </div>
+    </div>
+    <div class="route-card" style="border-left: 4px solid #D4548A;">
+      <span class="route-path" style="background:rgba(212,84,138,0.12); color:#A0306A;">/rituel</span>
+      <div class="route-info">
+        <p class="route-name">Rituel de Beauté — RituelPage <span style="background:#D4548A;color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;margin-left:8px;font-weight:700">AUTONOME</span></p>
+        <p class="route-desc">Page one-page dédiée avec sa propre navbar (boutons arrondis), footer, écran de chargement et 6 sections : Hero carousel (3 slides), Introduction, Valeurs, Soins & Produits (9 produits), Galerie, Contact. Fond plum/rose — charte Rituel de Beauté.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-tip" style="margin-top:16px;">
+      <span class="callout-icon">⚙️</span>
+      <p><strong>Système de routes autonomes :</strong> Dans <code>App.jsx</code>, le tableau <code>STANDALONE_ROUTES = ['/senteurs', '/rituel']</code> masque la Navbar et le Footer globaux APISAHI Group sur ces routes, et sélectionne l'écran de chargement adapté à chaque marque.</p>
+    </div>
+
     <div class="callout callout-tip">
       <span class="callout-icon">💡</span>
       <p>Le composant <code>ScrollToTop</code> réinitialise automatiquement la position de scroll à <code>0</code> à chaque changement de route ET affiche un bouton flottant doré pour remonter en haut de page après 400px de défilement.</p>
@@ -1059,22 +1104,30 @@
 
     <div class="subsection">
       <h3>Hiérarchie globale</h3>
-      <pre><span class="comment"># Arbre de rendu simplifié</span>
+      <pre><span class="comment"># Arbre de rendu — système routes autonomes (v2)</span>
 &lt;App&gt;
   &lt;BrowserRouter&gt;
-    &lt;ScrollToTop /&gt;          <span class="comment"># Reset scroll + bouton flottant</span>
-    &lt;Navbar /&gt;               <span class="comment"># Sticky, scroll-aware, hamburger mobile</span>
-    &lt;main&gt;
-      &lt;AnimatePresence&gt;      <span class="comment"># Gère transitions entre pages</span>
+    &lt;Layout&gt;                 <span class="comment"># Lit useLocation() pour détecter la route</span>
+      &lt;LoadingComponent /&gt;   <span class="comment"># APISAHI | SenteursLoading | RituelLoading</span>
+      &lt;ScrollToTop /&gt;
+      {!isStandalone &amp;&amp; &lt;Navbar /&gt;}    <span class="comment"># Masqué sur /senteurs et /rituel</span>
+      &lt;AnimatePresence mode="wait"&gt;
         &lt;Routes&gt;
-          &lt;Route path="/" element={&lt;HomePage /&gt;} /&gt;
-          &lt;Route path="/groupe" element={&lt;GroupPage /&gt;} /&gt;
-          <span class="comment">... 4 autres routes ...</span>
+          <span class="comment"># Routes APISAHI Group (avec Navbar + Footer globaux)</span>
+          &lt;Route path="/"        element={&lt;HomePage /&gt;} /&gt;
+          &lt;Route path="/groupe"  element={&lt;GroupPage /&gt;} /&gt;
+          &lt;Route path="/univers" element={&lt;UniversPage /&gt;} /&gt;
+          &lt;Route path="/offres"  element={&lt;OffersPage /&gt;} /&gt;
+          &lt;Route path="/galerie" element={&lt;GalleryPage /&gt;} /&gt;
+          &lt;Route path="/contact" element={&lt;ContactPage /&gt;} /&gt;
+          <span class="comment"># Routes AUTONOMES (Navbar + Footer propres à la marque)</span>
+          &lt;Route path="/senteurs" element={&lt;SenteursPage /&gt;} /&gt;
+          &lt;Route path="/rituel"   element={&lt;RituelPage /&gt;} /&gt;
         &lt;/Routes&gt;
       &lt;/AnimatePresence&gt;
-    &lt;/main&gt;
-    &lt;Footer /&gt;               <span class="comment"># 3 colonnes sur fond noir</span>
-    &lt;Toaster /&gt;              <span class="comment"># react-hot-toast, stylisé aux couleurs marque</span>
+      {!isStandalone &amp;&amp; &lt;Footer /&gt;}    <span class="comment"># Masqué sur /senteurs et /rituel</span>
+      &lt;Toaster /&gt;
+    &lt;/Layout&gt;
   &lt;/BrowserRouter&gt;
 &lt;/App&gt;</pre>
     </div>
@@ -1493,12 +1546,12 @@ npm run preview
       <table>
         <thead><tr><th>Fichier</th><th>Taille brute</th><th>Taille gzipée</th></tr></thead>
         <tbody>
-          <tr><td><code>dist/index.html</code></td><td>1,08 Ko</td><td>0,60 Ko</td></tr>
-          <tr><td><code>dist/assets/index-*.css</code></td><td>40,98 Ko</td><td>7,49 Ko</td></tr>
-          <tr><td><code>dist/assets/index-*.js</code></td><td>451,07 Ko</td><td>143,65 Ko</td></tr>
+          <tr><td><code>dist/index.html</code></td><td>1,06 Ko</td><td>0,61 Ko</td></tr>
+          <tr><td><code>dist/assets/index-*.css</code></td><td>44,35 Ko</td><td>7,99 Ko</td></tr>
+          <tr><td><code>dist/assets/index-*.js</code></td><td>491,86 Ko</td><td>152,13 Ko</td></tr>
         </tbody>
       </table>
-      <p>Le JS gzipé est de <strong>143 Ko</strong> — acceptable pour une SPA React avec animations. Pour réduire davantage, envisager le <em>code splitting</em> par route (lazy loading).</p>
+      <p>Le JS gzipé est de <strong>152 Ko</strong> pour 8 pages (dont 2 pages autonomes complètes avec leur propre navbar, footer et loading screen). Pour réduire, envisager le <em>lazy loading</em> par route avec <code>React.lazy()</code>.</p>
     </div>
   </div>
 
@@ -1709,6 +1762,96 @@ npm run preview
   <div class="divider"></div>
 
   <!-- ============================================================ -->
+  <!-- § 16 — PAGES AUTONOMES SENTEURS & RITUEL                     -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">16</div>
+      <div class="section-title-group">
+        <p class="section-tag">Architecture avancée</p>
+        <h2>Pages autonomes — Senteurs d'Afrique & Rituel de Beauté</h2>
+      </div>
+    </div>
+
+    <p>Deux filiales disposent de leur propre <strong>one-page complète</strong> avec une identité visuelle distincte, indépendante du site APISAHI Group. Chacune possède son propre système de navigation, pied de page et écran de chargement.</p>
+
+    <div class="subsection">
+      <h3>Système de routes autonomes (App.jsx)</h3>
+      <pre><span class="comment">// Les routes autonomes masquent Navbar/Footer globaux</span>
+<span class="keyword">const</span> STANDALONE_ROUTES = [<span class="string">'/senteurs'</span>, <span class="string">'/rituel'</span>]
+
+<span class="comment">// Sélection automatique de l'écran de chargement</span>
+<span class="keyword">const</span> LoadingComponent = isSenteurs
+  ? SenteursLoadingScreen
+  : isRituel
+  ? RituelLoadingScreen
+  : LoadingScreen  <span class="comment">// APISAHI Group par défaut</span></pre>
+    </div>
+
+    <div class="subsection">
+      <h3>Comparatif des 2 chartes autonomes</h3>
+      <table>
+        <thead><tr><th>Élément</th><th>Senteurs d'Afrique (/senteurs)</th><th>Rituel de Beauté (/rituel)</th></tr></thead>
+        <tbody>
+          <tr><td>Fond principal</td><td><code>#000</code> → <code>#0D0A00</code> (noir chaud)</td><td><code>#1E0A18</code> → <code>#2D0F20</code> (plum sombre)</td></tr>
+          <tr><td>Couleur accent</td><td><code>#C9A84C</code> Doré</td><td><code>#D4548A</code> Rose</td></tr>
+          <tr><td>Boutons</td><td>Rectangulaires, bords droits (<code>border-radius: 2px</code>)</td><td>Arrondis (<code>border-radius: 20px</code>)</td></tr>
+          <tr><td>Loading screen</td><td>Logo SA + barre dorée</td><td>Logo RB + barre rose</td></tr>
+          <tr><td>CTA principal</td><td>"Commander"</td><td>"Prendre soin de moi"</td></tr>
+          <tr><td>Sections</td><td>Hero · Intro · Valeurs · Produits · Galerie · Contact</td><td>Hero · Intro · Valeurs · Soins · Galerie · Contact</td></tr>
+          <tr><td>Produits</td><td>9 (encens, bougies, diffuseurs, coffrets…)</td><td>9 (huiles, masques, crèmes, sérums, coffrets…)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <h3>Composants par marque autonome</h3>
+      <div class="card-grid">
+        <div class="card" style="border-top: 3px solid #C9A84C;">
+          <div class="card-title" style="color:#A6852A;">Senteurs d'Afrique</div>
+          <div class="card-desc">
+            <code>SenteursNavbar.jsx</code> — Liens ancres (#hero, #collections, #galerie, #contact)<br>
+            <code>SenteursFooter.jsx</code> — Logo SA + réseaux + navigation<br>
+            <code>SenteursLoadingScreen.jsx</code> — Monogramme SA doré<br>
+            <code>SenteursPage.jsx</code> — 400+ lignes, page complète<br>
+            <code>public/images/senteurs/</code> — Logo + 9 produits
+          </div>
+        </div>
+        <div class="card" style="border-top: 3px solid #D4548A;">
+          <div class="card-title" style="color:#A0306A;">Rituel de Beauté</div>
+          <div class="card-desc">
+            <code>RituelNavbar.jsx</code> — Liens ancres + bouton "Prendre soin de moi"<br>
+            <code>RituelFooter.jsx</code> — Logo RB + réseaux + navigation<br>
+            <code>RituelLoadingScreen.jsx</code> — Monogramme RB rose<br>
+            <code>RituelPage.jsx</code> — 400+ lignes, page complète<br>
+            <code>public/images/rituel/</code> — Logo + 9 produits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Images à fournir par marque</h3>
+      <table>
+        <thead><tr><th>Marque</th><th>Fichier</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2">Senteurs</td><td><code>public/images/senteurs/logo.jpg</code></td><td>Logo dans navbar, footer et loading screen</td></tr>
+          <tr><td><code>public/images/senteurs/produit-*.jpg</code></td><td>9 produits (encens, bougies, diffuseur, fragrance, huile, 3 coffrets)</td></tr>
+          <tr><td rowspan="2">Rituel</td><td><code>public/images/rituel/logo.jpg</code></td><td>Logo dans navbar, footer et loading screen</td></tr>
+          <tr><td><code>public/images/rituel/produit-*.jpg</code></td><td>9 produits (huile, masque, crème, gommage, sérum, karité, kit, 2 coffrets)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ️</span>
+      <p><strong>Navigation interne :</strong> Les pages autonomes utilisent des ancres HTML (<code>href="#collections"</code>) pour le scroll interne, pas React Router. Le bouton "← APISAHI" dans chaque navbar ramène vers la page d'accueil principale via <code>Link to="/"</code>.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
   <!-- FOOTER DOC                                                    -->
   <!-- ============================================================ -->
   <div style="text-align:center; padding: 48px 0 24px; border-top: 2px solid var(--beige-dark);">
@@ -1717,8 +1860,12 @@ npm run preview
     </div>
     <p style="font-family:var(--font-h); font-size:22px; font-weight:700; color:var(--noir); margin-bottom:4px;">APISAHI Group</p>
     <p style="font-size:12px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px;">L'art de sublimer vos instants de vie</p>
-    <p style="font-size:11px; color:var(--gray);">Documentation générée le 4 mai 2026 — Version 1.0.0</p>
-    <p style="font-size:11px; color:var(--gray);">Site développé avec React 18 + Vite 6 + Tailwind CSS 3</p>
+    <p style="font-size:11px; color:var(--gray);">Documentation mise à jour le 5 mai 2026 — Version 2.0.0</p>
+    <p style="font-size:11px; color:var(--gray);">8 pages · 2 marques autonomes · React 18 + Vite 6 + Tailwind CSS 3</p>
+    <p style="font-size:11px; color:var(--gray); margin-top:4px;">
+      GitHub : <strong>github.com/aengoue01-eng/apisahi-group</strong> &nbsp;·&nbsp;
+      Production : <strong>apisahigroup.vercel.app</strong>
+    </p>
   </div>
 
 </div><!-- /page -->
