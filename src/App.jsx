@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import LoadingScreen from '@/components/ui/LoadingScreen'
+import SenteursLoadingScreen from '@/components/senteurs/SenteursLoadingScreen'
 
 import HomePage from '@/pages/HomePage'
 import GroupPage from '@/pages/GroupPage'
@@ -23,7 +24,7 @@ function Layout() {
 
   return (
     <>
-      <LoadingScreen />
+      {isStandalone ? <SenteursLoadingScreen /> : <LoadingScreen />}
       <ScrollToTop />
       {!isStandalone && <Navbar />}
       <AnimatePresence mode="wait">
