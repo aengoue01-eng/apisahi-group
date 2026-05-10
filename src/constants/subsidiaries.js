@@ -184,7 +184,7 @@ export const SUBSIDIARIES = [
       "Découvrez un univers où la skincare naturelle s'invite dans votre quotidien. Inspirés des trésors de la nature et des secrets de beauté transmis de génération en génération, nos rituels vous accompagnent dans votre quête d'une peau éclatante et d'un bien-être durable.",
     shortDesc: "Soins naturels, bien-être et rituels de beauté personnalisés.",
     cover: "/images/subsidiaries/rituel/rituel-cover.jpg",
-    path: "/offres#rituel",
+    path: "/rituel",
     univers: "/univers",
     packs: [
       {

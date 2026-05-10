@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import LoadingScreen from '@/components/ui/LoadingScreen'
 import SenteursLoadingScreen from '@/components/senteurs/SenteursLoadingScreen'
+import RituelLoadingScreen from '@/components/rituel/RituelLoadingScreen'
 
 import HomePage from '@/pages/HomePage'
 import GroupPage from '@/pages/GroupPage'
@@ -15,16 +16,25 @@ import OffersPage from '@/pages/OffersPage'
 import GalleryPage from '@/pages/GalleryPage'
 import ContactPage from '@/pages/ContactPage'
 import SenteursPage from '@/pages/SenteursPage'
+import RituelPage from '@/pages/RituelPage'
 
-const STANDALONE_ROUTES = ['/senteurs']
+const STANDALONE_ROUTES = ['/senteurs', '/rituel']
 
 function Layout() {
   const location = useLocation()
   const isStandalone = STANDALONE_ROUTES.includes(location.pathname)
+  const isSenteurs = location.pathname === '/senteurs'
+  const isRituel = location.pathname === '/rituel'
+
+  const LoadingComponent = isSenteurs
+    ? SenteursLoadingScreen
+    : isRituel
+    ? RituelLoadingScreen
+    : LoadingScreen
 
   return (
     <>
-      {isStandalone ? <SenteursLoadingScreen /> : <LoadingScreen />}
+      <LoadingComponent />
       <ScrollToTop />
       {!isStandalone && <Navbar />}
       <AnimatePresence mode="wait">
@@ -36,6 +46,7 @@ function Layout() {
           <Route path="/galerie" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/senteurs" element={<SenteursPage />} />
+          <Route path="/rituel" element={<RituelPage />} />
         </Routes>
       </AnimatePresence>
       {!isStandalone && <Footer />}
