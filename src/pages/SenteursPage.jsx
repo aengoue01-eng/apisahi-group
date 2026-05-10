@@ -41,25 +41,79 @@ const SLIDES = [
   },
 ]
 
-const PACKS = [
+const PRODUCTS = [
   {
-    name: 'Pack Découverte',
-    sub: "L'Essentiel",
-    desc: "Une introduction parfaite à l'univers olfactif de Senteurs d'Afrique.",
-    items: ["1 encens artisanal au choix", "1 bougie parfumée", "Conseils d'utilisation et d'ambiance"],
+    id: 1,
+    name: 'Encens Artisanal',
+    category: 'Encens',
+    tag: 'Collection Afrique',
+    img: '/images/senteurs/produit-encens.jpg',
+    gradient: 'linear-gradient(160deg, #1A0E00 0%, #0D0800 100%)',
   },
   {
-    name: 'Pack Ambiance',
-    sub: "L'Art de Recevoir",
-    desc: 'Idéal pour parfumer et sublimer vos espaces de vie au quotidien.',
-    items: ["1 bougie parfumée", "1 diffuseur d'intérieur", "1 fragrance signature au choix"],
+    id: 2,
+    name: 'Bougie Parfumée Savane',
+    category: 'Bougies',
+    tag: 'Édition limitée',
+    img: '/images/senteurs/produit-bougie-savane.jpg',
+    gradient: 'linear-gradient(160deg, #120A00 0%, #1A1000 100%)',
+  },
+  {
+    id: 3,
+    name: 'Bougie Parfumée Nuit',
+    category: 'Bougies',
+    tag: 'Bestseller',
+    img: '/images/senteurs/produit-bougie-nuit.jpg',
+    gradient: 'linear-gradient(160deg, #0A0A00 0%, #100D00 100%)',
+  },
+  {
+    id: 4,
+    name: "Diffuseur d'Intérieur",
+    category: 'Diffuseurs',
+    tag: 'Collection Signature',
+    img: '/images/senteurs/produit-diffuseur.jpg',
+    gradient: 'linear-gradient(160deg, #0D0A00 0%, #1A1400 100%)',
+  },
+  {
+    id: 5,
+    name: 'Fragrance Baobab & Vanille',
+    category: 'Fragrances',
+    tag: 'Exclusivité',
+    img: '/images/senteurs/produit-fragrance.jpg',
+    gradient: 'linear-gradient(160deg, #100800 0%, #0A0500 100%)',
+  },
+  {
+    id: 6,
+    name: "Huile Essentielle Ylang-Ylang",
+    category: 'Huiles essentielles',
+    tag: 'Pure & Naturelle',
+    img: '/images/senteurs/produit-huile.jpg',
+    gradient: 'linear-gradient(160deg, #0A0E00 0%, #121A00 100%)',
+  },
+  {
+    id: 7,
+    name: 'Coffret Découverte',
+    category: 'Coffrets',
+    tag: "L'Essentiel",
+    img: '/images/senteurs/produit-coffret-decouverte.jpg',
+    gradient: 'linear-gradient(160deg, #1A1200 0%, #0D0900 100%)',
+  },
+  {
+    id: 8,
+    name: "Coffret L'Art de Recevoir",
+    category: 'Coffrets',
+    tag: 'Notre sélection',
     featured: true,
+    img: '/images/senteurs/produit-coffret-ambiance.jpg',
+    gradient: 'linear-gradient(160deg, #1A1000 0%, #0D0800 100%)',
   },
   {
-    name: 'Pack Signature',
-    sub: "L'Expérience Sensorielle Complète",
-    desc: "Une immersion totale dans un univers de bien-être, d'élégance et d'émotions.",
-    items: ["1 bougie haut de gamme", "1 diffuseur d'intérieur", "1 huile essentielle", "1 encens artisanal", "Guide personnalisé pour votre rituel olfactif"],
+    id: 9,
+    name: 'Coffret Signature',
+    category: 'Coffrets',
+    tag: 'Expérience complète',
+    img: '/images/senteurs/produit-coffret-signature.jpg',
+    gradient: 'linear-gradient(160deg, #120E00 0%, #0A0700 100%)',
   },
 ]
 
@@ -282,7 +336,7 @@ export default function SenteursPage() {
         </div>
       </section>
 
-      {/* ══ COLLECTIONS ══ */}
+      {/* ══ COLLECTIONS — LISTING PRODUITS ══ */}
       <section id="collections" style={{ background: '#080500', padding: '96px 0', scrollMarginTop: '80px' }}>
         <div className="max-w-6xl mx-auto px-6">
           <FadeIn>
@@ -290,49 +344,101 @@ export default function SenteursPage() {
               <p className="text-xs tracking-[0.4em] uppercase mb-4" style={{ color: GOLD }}>Nos collections</p>
               <h2 className="font-heading text-4xl md:text-5xl font-bold text-white"
                 style={{ fontFamily: "'Playfair Display', serif" }}>
-                Choisissez votre expérience
+                Nos produits
               </h2>
               <GoldDivider />
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {PACKS.map((pack, i) => (
-              <FadeIn key={pack.name} delay={i * 0.12}>
-                <div className="flex flex-col h-full p-8 relative transition-all duration-500"
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {PRODUCTS.map((product, i) => (
+              <FadeIn key={product.id} delay={i * 0.07}>
+                <div
+                  className="group relative flex flex-col cursor-pointer transition-all duration-300 hover:-translate-y-1"
                   style={{
-                    background: pack.featured ? 'linear-gradient(160deg,#1A1200,#0D0900)' : 'rgba(255,255,255,0.02)',
-                    border: pack.featured ? `1px solid ${GOLD}60` : `1px solid rgba(255,255,255,0.07)`,
+                    background: 'rgba(255,255,255,0.02)',
+                    border: product.featured ? `1px solid ${GOLD}50` : `1px solid rgba(255,255,255,0.07)`,
                     borderRadius: '4px',
-                  }}>
-                  {pack.featured && (
-                    <div className="absolute top-0 left-0 right-0 text-center py-2 text-xs font-bold tracking-[0.3em] uppercase"
-                      style={{ background: `linear-gradient(90deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '4px 4px 0 0' }}>
-                      Notre sélection
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* Badge */}
+                  {product.featured && (
+                    <div className="absolute top-3 left-3 z-10 px-2 py-1 text-xs font-bold tracking-widest uppercase"
+                      style={{ background: `linear-gradient(90deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}>
+                      Sélection
                     </div>
                   )}
-                  <div className={pack.featured ? 'pt-8' : ''}>
-                    <div className="mb-6" style={{ width: '32px', height: '1px', background: GOLD }} />
-                    <h3 className="font-heading text-xl font-bold text-white mb-1"
-                      style={{ fontFamily: "'Playfair Display', serif" }}>{pack.name}</h3>
-                    <p className="text-xs tracking-widest uppercase mb-4" style={{ color: GOLD }}>{pack.sub}</p>
-                    <p className="text-sm leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>{pack.desc}</p>
-                    <div className="mb-6" style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
-                    <ul className="space-y-3 flex-1 mb-10">
-                      {pack.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                          <svg className="mt-0.5 flex-shrink-0" width="14" height="14" fill="none" stroke={GOLD} strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <a href="#contact"
-                      className="block text-center py-3 text-xs font-bold tracking-[0.3em] uppercase transition-opacity hover:opacity-80"
-                      style={pack.featured
-                        ? { background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }
-                        : { border: `1px solid ${GOLD}40`, color: GOLD_LIGHT, borderRadius: '2px' }}>
+
+                  {/* Image produit */}
+                  <div className="relative overflow-hidden" style={{ aspectRatio: '1/1' }}>
+                    <img
+                      src={product.img}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.style.display = 'none'
+                        e.target.nextSibling.style.display = 'flex'
+                      }}
+                    />
+                    {/* Placeholder si pas d'image */}
+                    <div
+                      className="hidden w-full h-full items-center justify-center"
+                      style={{ background: product.gradient, position: 'absolute', inset: 0 }}
+                    >
+                      <div className="text-center">
+                        <div className="mx-auto mb-2" style={{ width: '20px', height: '1px', background: `${GOLD}60` }} />
+                        <p className="text-xs tracking-widest" style={{ color: `${GOLD}60` }}>
+                          {product.category}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Overlay hover */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                      style={{ background: 'rgba(0,0,0,0.45)' }}
+                    >
+                      <a
+                        href="#contact"
+                        className="px-5 py-2.5 text-xs font-bold tracking-widest uppercase"
+                        style={{ background: `linear-gradient(135deg, ${GOLD}, #A6852A)`, color: '#000', borderRadius: '2px' }}
+                      >
+                        Commander
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Infos produit */}
+                  <div className="p-4">
+                    <p className="text-xs tracking-widest uppercase mb-1" style={{ color: `${GOLD}70` }}>
+                      {product.category}
+                    </p>
+                    <h3
+                      className="font-heading font-semibold text-white text-sm md:text-base mb-2 group-hover:text-gold transition-colors duration-200"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                      {product.name}
+                    </h3>
+                    <p className="text-xs mb-4" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      {product.tag}
+                    </p>
+                    <a
+                      href="#contact"
+                      className="block text-center py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-200"
+                      style={{
+                        border: `1px solid ${GOLD}35`,
+                        color: GOLD_LIGHT,
+                        borderRadius: '2px',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = `${GOLD}15`
+                        e.currentTarget.style.borderColor = `${GOLD}70`
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent'
+                        e.currentTarget.style.borderColor = `${GOLD}35`
+                      }}
+                    >
                       Commander
                     </a>
                   </div>

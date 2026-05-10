@@ -145,11 +145,40 @@ export default function SenteursNavbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.32 }}
-            className="fixed inset-0 z-[60] flex flex-col px-8 pt-28 pb-10"
+            className="fixed inset-0 z-[60] flex flex-col px-8 pt-8 pb-10"
             style={{ background: '#050300' }}
           >
-            {/* Trait déco haut */}
-            <div className="mb-8" style={{ height: '1px', background: `linear-gradient(90deg, ${GOLD}40, transparent)` }} />
+            {/* Bouton fermer */}
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full overflow-hidden border flex-shrink-0"
+                  style={{ borderColor: `${GOLD}40` }}>
+                  <img src="/images/senteurs/logo.jpg" alt="SA"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none'
+                      e.target.parentElement.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:${GOLD};font-weight:700;font-size:11px">SA</div>`
+                    }}
+                  />
+                </div>
+                <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>
+                  Senteurs d'Afrique
+                </p>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200"
+                style={{ border: `1px solid ${GOLD}30`, color: GOLD }}
+                aria-label="Fermer le menu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Trait déco */}
+            <div className="mb-6" style={{ height: '1px', background: `linear-gradient(90deg, ${GOLD}40, transparent)` }} />
 
             <nav className="flex flex-col gap-0 flex-1">
               {LINKS.map((link, i) => (
