@@ -136,7 +136,7 @@ export const SUBSIDIARIES = [
       "Senteurs d'Afrique fait vibrer vos sens à travers des créations olfactives uniques inspirées de l'âme, de la richesse et de l'élégance africaine. Nos collections transforment vos espaces en véritables havres de paix, d'émotion et de raffinement.",
     shortDesc: "Ambiances raffinées, émotions olfactives et élégance intérieure.",
     cover: "/images/subsidiaries/senteurs/senteurs-cover.jpg",
-    path: "/offres#senteurs",
+    path: "/senteurs",
     univers: "/univers",
     packs: [
       {

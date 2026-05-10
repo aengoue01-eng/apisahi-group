@@ -13,6 +13,7 @@ import UniversPage from '@/pages/UniversPage'
 import OffersPage from '@/pages/OffersPage'
 import GalleryPage from '@/pages/GalleryPage'
 import ContactPage from '@/pages/ContactPage'
+import SenteursPage from '@/pages/SenteursPage'
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -25,6 +26,7 @@ function AnimatedRoutes() {
         <Route path="/offres" element={<OffersPage />} />
         <Route path="/galerie" element={<GalleryPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/senteurs" element={<SenteursPage />} />
       </Routes>
     </AnimatePresence>
   )
