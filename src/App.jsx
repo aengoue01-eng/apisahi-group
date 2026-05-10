@@ -15,33 +15,29 @@ import GalleryPage from '@/pages/GalleryPage'
 import ContactPage from '@/pages/ContactPage'
 import SenteursPage from '@/pages/SenteursPage'
 
-function AnimatedRoutes() {
-  const location = useLocation()
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/groupe" element={<GroupPage />} />
-        <Route path="/univers" element={<UniversPage />} />
-        <Route path="/offres" element={<OffersPage />} />
-        <Route path="/galerie" element={<GalleryPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/senteurs" element={<SenteursPage />} />
-      </Routes>
-    </AnimatePresence>
-  )
-}
+const STANDALONE_ROUTES = ['/senteurs']
 
-export default function App() {
+function Layout() {
+  const location = useLocation()
+  const isStandalone = STANDALONE_ROUTES.includes(location.pathname)
+
   return (
-    <BrowserRouter>
+    <>
       <LoadingScreen />
       <ScrollToTop />
-      <Navbar />
-      <main>
-        <AnimatedRoutes />
-      </main>
-      <Footer />
+      {!isStandalone && <Navbar />}
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/groupe" element={<GroupPage />} />
+          <Route path="/univers" element={<UniversPage />} />
+          <Route path="/offres" element={<OffersPage />} />
+          <Route path="/galerie" element={<GalleryPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/senteurs" element={<SenteursPage />} />
+        </Routes>
+      </AnimatePresence>
+      {!isStandalone && <Footer />}
       <Toaster
         position="top-center"
         toastOptions={{
@@ -56,6 +52,14 @@ export default function App() {
           },
         }}
       />
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
     </BrowserRouter>
   )
 }
