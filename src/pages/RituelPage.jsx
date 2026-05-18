@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -159,6 +159,11 @@ function RituelContactForm() {
 }
 
 export default function RituelPage() {
+  useEffect(() => {
+    document.documentElement.style.setProperty('--page-accent', '#D4548A')
+    return () => document.documentElement.style.removeProperty('--page-accent')
+  }, [])
+
   return (
     <PageWrapper>
       <RituelNavbar />

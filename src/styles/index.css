@@ -160,6 +160,6 @@
   background: var(--color-beige-dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gold);
+  background: var(--page-accent, var(--color-gold));
   border-radius: 3px;
 }

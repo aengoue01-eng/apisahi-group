@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -252,6 +252,11 @@ function LalouContactForm() {
 }
 
 export default function LalouPage() {
+  useEffect(() => {
+    document.documentElement.style.setProperty('--page-accent', '#fcc581')
+    return () => document.documentElement.style.removeProperty('--page-accent')
+  }, [])
+
   return (
     <PageWrapper>
       <LalouNavbar />
