@@ -45,7 +45,7 @@ export default function Navbar() {
               to={link.path}
               end={link.path === '/'}
               className={({ isActive }) =>
-                `text-sm font-medium tracking-wide transition-colors duration-200 relative group
+                `text-base font-medium tracking-wide transition-colors duration-200 relative group
                 ${isActive
                   ? 'text-gold'
                   : opaque

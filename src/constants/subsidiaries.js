@@ -10,7 +10,7 @@ export const SUBSIDIARIES = [
       "ZEYA Conciergerie vous accompagne dans tous vos déplacements professionnels et personnels en vous proposant des solutions sur mesure adaptées à votre style de vie. Notre mission : vous offrir confort, sérénité et excellence à chaque étape de votre séjour.",
     shortDesc: "Services personnalisés, voyages d'affaires et tourisme haut de gamme.",
     cover: "/images/subsidiaries/zeya/zeya-cover.jpg",
-    path: "/offres#zeya",
+    path: "/zeya",
     univers: "/univers",
     packs: [
       {
@@ -31,7 +31,7 @@ export const SUBSIDIARIES = [
           "Véhicule avec ou sans chauffeur",
           "Option carburant incluse",
         ],
-        highlight: true,
+        highlight: false,
       },
       {
         name: "Pack 3 — Expérience Complète Premium",
@@ -44,7 +44,7 @@ export const SUBSIDIARIES = [
           "Guide et accompagnement",
           "Organisation complète du séjour",
         ],
-        highlight: false,
+        highlight: true,
       },
     ],
   },
@@ -59,7 +59,7 @@ export const SUBSIDIARIES = [
       "Lalou Box Studio crée des coffrets pensés pour offrir bien plus qu'un cadeau : une attention, une émotion et un souvenir inoubliable. Chaque création est soigneusement élaborée pour célébrer les moments précieux de la vie avec élégance et personnalisation.",
     shortDesc: "Coffrets personnalisés, cadeaux d'exception et émotions sur mesure.",
     cover: "/images/subsidiaries/lalou/lalou-cover.jpg",
-    path: "/offres#lalou",
+    path: "/lalou",
     univers: "/univers",
     packs: [
       {
@@ -129,6 +129,7 @@ export const SUBSIDIARIES = [
     id: "senteurs",
     name: "Senteurs d'Afrique",
     tagline: "Parfums d'Afrique Authentiques",
+    note: "Possibilité de personnaliser les packs selon vos envies et vos besoins.",
     color: "#C9A84C",
     bgColor: "bg-gold/10",
     icon: "🌿",
@@ -157,7 +158,7 @@ export const SUBSIDIARIES = [
           "1 diffuseur d'intérieur",
           "1 fragrance signature au choix",
         ],
-        highlight: true,
+        highlight: false,
       },
       {
         name: "Pack Signature — L'Expérience Sensorielle Complète",
@@ -169,7 +170,7 @@ export const SUBSIDIARIES = [
           "1 encens artisanal",
           "Guide personnalisé pour créer votre rituel olfactif",
         ],
-        highlight: false,
+        highlight: true,
       },
     ],
   },
@@ -177,6 +178,7 @@ export const SUBSIDIARIES = [
     id: "rituel",
     name: "Rituel de Beauté",
     tagline: "Rituels Beauté Naturels & Personnalisés",
+    note: "Les coffrets beauté seront bientôt disponibles.",
     color: "#7A9E7E",
     bgColor: "bg-green/10",
     icon: "✨",

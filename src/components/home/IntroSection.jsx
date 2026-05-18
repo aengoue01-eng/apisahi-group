@@ -27,11 +27,11 @@ export default function IntroSection() {
             <motion.div variants={variants}>
               <SectionTitle
                 tag="Qui sommes-nous"
-                title="Un groupe lifestyle pensé pour sublimer votre quotidien"
+                title="Un groupe pensé pour sublimer votre quotidien"
               />
             </motion.div>
             <motion.p variants={variants} className="text-gray-600 leading-relaxed mb-4">
-              Bienvenue chez APISAHI Group, un groupe lifestyle imaginé pour transformer chaque instant du quotidien en une expérience élégante, authentique et mémorable.
+              Bienvenue chez APISAHI Group, une maison de marques imaginée pour transformer chaque instant du quotidien en une expérience élégante, authentique et mémorable.
             </motion.p>
             <motion.p variants={variants} className="text-gray-600 leading-relaxed mb-8">
               À travers nos différentes marques, nous vous proposons des univers dédiés à la conciergerie premium, au bien-être, à la beauté naturelle, aux senteurs raffinées et aux coffrets cadeaux personnalisés.

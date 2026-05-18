@@ -4,7 +4,7 @@ import SectionTitle from '@/components/ui/SectionTitle'
 import PackCard from './PackCard'
 
 export default function SubsidiarySection({ subsidiary, alternate }) {
-  const { id, name, tagline, description, color, packs } = subsidiary
+  const { id, name, tagline, description, color, packs, note } = subsidiary
   const { ref, inView, staggerVariants, variants } = useScrollAnimation()
 
   return (
@@ -40,6 +40,14 @@ export default function SubsidiarySection({ subsidiary, alternate }) {
             <PackCard key={pack.name} pack={pack} accentColor={color} />
           ))}
         </div>
+
+        {/* Note filiale */}
+        {note && (
+          <div className="mt-8 flex items-start gap-3 px-5 py-4 rounded-lg border" style={{ borderColor: `${color}30`, background: `${color}08` }}>
+            <div className="w-1 h-full min-h-[20px] rounded-full flex-shrink-0 mt-0.5" style={{ backgroundColor: color }} />
+            <p className="text-sm text-gray-600 italic leading-relaxed">{note}</p>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -8,6 +8,8 @@ import ScrollToTop from '@/components/ui/ScrollToTop'
 import LoadingScreen from '@/components/ui/LoadingScreen'
 import SenteursLoadingScreen from '@/components/senteurs/SenteursLoadingScreen'
 import RituelLoadingScreen from '@/components/rituel/RituelLoadingScreen'
+import ZeyaLoadingScreen from '@/components/zeya/ZeyaLoadingScreen'
+import LalouLoadingScreen from '@/components/lalou/LalouLoadingScreen'
 
 import HomePage from '@/pages/HomePage'
 import GroupPage from '@/pages/GroupPage'
@@ -17,19 +19,27 @@ import GalleryPage from '@/pages/GalleryPage'
 import ContactPage from '@/pages/ContactPage'
 import SenteursPage from '@/pages/SenteursPage'
 import RituelPage from '@/pages/RituelPage'
+import ZeyaPage from '@/pages/ZeyaPage'
+import LalouPage from '@/pages/LalouPage'
 
-const STANDALONE_ROUTES = ['/senteurs', '/rituel']
+const STANDALONE_ROUTES = ['/senteurs', '/rituel', '/zeya', '/lalou']
 
 function Layout() {
   const location = useLocation()
   const isStandalone = STANDALONE_ROUTES.includes(location.pathname)
   const isSenteurs = location.pathname === '/senteurs'
   const isRituel = location.pathname === '/rituel'
+  const isZeya = location.pathname === '/zeya'
+  const isLalou = location.pathname === '/lalou'
 
   const LoadingComponent = isSenteurs
     ? SenteursLoadingScreen
     : isRituel
     ? RituelLoadingScreen
+    : isZeya
+    ? ZeyaLoadingScreen
+    : isLalou
+    ? LalouLoadingScreen
     : LoadingScreen
 
   return (
@@ -47,6 +57,8 @@ function Layout() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/senteurs" element={<SenteursPage />} />
           <Route path="/rituel" element={<RituelPage />} />
+          <Route path="/zeya" element={<ZeyaPage />} />
+          <Route path="/lalou" element={<LalouPage />} />
         </Routes>
       </AnimatePresence>
       {!isStandalone && <Footer />}

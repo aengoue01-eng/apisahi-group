@@ -23,7 +23,7 @@ function PresentationSection() {
               <SectionTitle tag="Présentation" title="APISAHI Group, un art de vivre" />
             </motion.div>
             <motion.p variants={variants} className="text-gray-600 leading-relaxed mb-4">
-              APISAHI Group est un groupe lifestyle réunissant plusieurs marques complémentaires, pensées pour enrichir votre quotidien à travers des expériences uniques, élégantes et authentiques.
+              APISAHI Group est une maison de marques réunissant plusieurs univers complémentaires, pensés pour enrichir votre quotidien à travers des expériences uniques, élégantes et authentiques.
             </motion.p>
             <motion.p variants={variants} className="text-gray-600 leading-relaxed mb-4">
               À travers nos différentes filiales, nous accompagnons nos clients dans les domaines de la conciergerie, du bien-être, de la beauté, de l'art de vivre et de l'expérience cadeau.
@@ -109,7 +109,7 @@ function SubsidiariesTimeline() {
                 <h3 className="font-heading font-semibold text-noir text-base mb-2">{s.name}</h3>
                 <p className="text-xs text-gold uppercase tracking-wide mb-3">{s.tagline}</p>
                 <p className="text-sm text-gray-500 leading-relaxed mb-4">{s.shortDesc}</p>
-                <Link to={s.path} className="text-sm font-medium text-gold hover:text-gold-dark transition-colors inline-flex items-center gap-1">
+                <Link to={`/offres#${s.id}`} className="text-sm font-medium text-gold hover:text-gold-dark transition-colors inline-flex items-center gap-1">
                   Voir les offres →
                 </Link>
               </div>

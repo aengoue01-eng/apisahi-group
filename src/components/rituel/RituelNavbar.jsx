@@ -73,7 +73,7 @@ export default function RituelNavbar() {
           <nav className="hidden lg:flex items-center gap-8">
             {LINKS.map((link) => (
               <button key={link.href} onClick={() => scrollTo(link.href)}
-                className="text-sm font-medium tracking-wide relative group"
+                className="text-base font-medium tracking-wide relative group"
                 style={{ color: 'rgba(255,255,255,0.75)', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = PINK_LIGHT}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.75)'}

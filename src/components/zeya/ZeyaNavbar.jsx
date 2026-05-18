@@ -4,13 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const GOLD = '#C9A84C'
 const LINKS = [
-  { label: "Senteurs d'Afrique", href: '#hero' },
-  { label: 'Collections', href: '#collections' },
+  { label: 'ZEYA Conciergerie', href: '#hero' },
+  { label: 'Nos Services', href: '#services' },
   { label: 'Galerie', href: '#galerie' },
   { label: 'Contact', href: '#contact' },
 ]
 
-export default function SenteursNavbar() {
+export default function ZeyaNavbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -35,11 +35,10 @@ export default function SenteursNavbar() {
 
   return (
     <>
-      {/* ── HEADER ── */}
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: opaque ? 'rgba(5,3,0,0.97)' : 'transparent',
+          background: opaque ? 'rgba(0,0,0,0.97)' : 'transparent',
           backdropFilter: opaque ? 'blur(12px)' : 'none',
           borderBottom: opaque ? `1px solid ${GOLD}20` : 'none',
         }}
@@ -49,25 +48,25 @@ export default function SenteursNavbar() {
           {/* Logo */}
           <button onClick={() => scrollTo('#hero')} className="flex items-center gap-3 focus:outline-none">
             <div
-              className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border"
-              style={{ borderColor: `${GOLD}40` }}
+              className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border flex items-center justify-center"
+              style={{ borderColor: `${GOLD}40`, background: '#050505' }}
             >
               <img
-                src="/images/senteurs/logo.jpg"
-                alt="Senteurs d'Afrique"
+                src="/images/zeya/logo.png"
+                alt="ZEYA Conciergerie"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.style.display = 'none'
-                  e.target.parentElement.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:${GOLD};font-weight:700;font-size:13px">SA</div>`
+                  e.target.parentElement.innerHTML = `<span style="font-family:'Playfair Display',serif;font-weight:700;font-size:12px;background:linear-gradient(135deg,${GOLD},#A6852A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px">ZC</span>`
                 }}
               />
             </div>
             <div className="hidden sm:block text-left">
               <p className="font-heading font-bold text-white text-base leading-none"
-                style={{ fontFamily: "'Playfair Display', serif" }}>
-                Senteurs
+                style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.08em' }}>
+                ZEYA
               </p>
-              <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>d'Afrique</p>
+              <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>Conciergerie</p>
             </div>
           </button>
 
@@ -115,29 +114,17 @@ export default function SenteursNavbar() {
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Menu"
           >
-            <span
-              className="block w-6 h-px transition-all duration-300"
-              style={{
-                background: menuOpen ? GOLD : 'white',
-                transform: menuOpen ? 'rotate(45deg) translate(0px, 6px)' : 'none',
-              }}
-            />
-            <span
-              className="block w-6 h-px transition-all duration-300"
-              style={{ background: menuOpen ? GOLD : 'white', opacity: menuOpen ? 0 : 1 }}
-            />
-            <span
-              className="block w-6 h-px transition-all duration-300"
-              style={{
-                background: menuOpen ? GOLD : 'white',
-                transform: menuOpen ? 'rotate(-45deg) translate(0px, -6px)' : 'none',
-              }}
-            />
+            <span className="block w-6 h-px transition-all duration-300"
+              style={{ background: menuOpen ? GOLD : 'white', transform: menuOpen ? 'rotate(45deg) translate(0px, 6px)' : 'none' }} />
+            <span className="block w-6 h-px transition-all duration-300"
+              style={{ background: menuOpen ? GOLD : 'white', opacity: menuOpen ? 0 : 1 }} />
+            <span className="block w-6 h-px transition-all duration-300"
+              style={{ background: menuOpen ? GOLD : 'white', transform: menuOpen ? 'rotate(-45deg) translate(0px, -6px)' : 'none' }} />
           </button>
         </div>
       </header>
 
-      {/* ── MENU MOBILE — rendu en dehors du header pour éviter les conflits de z-index ── */}
+      {/* Menu mobile */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -146,24 +133,21 @@ export default function SenteursNavbar() {
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.32 }}
             className="fixed inset-0 z-[60] flex flex-col px-8 pt-8 pb-10"
-            style={{ background: '#050300' }}
+            style={{ background: '#000' }}
           >
-            {/* Bouton fermer */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full overflow-hidden border flex-shrink-0"
-                  style={{ borderColor: `${GOLD}40` }}>
-                  <img src="/images/senteurs/logo.jpg" alt="SA"
+                <div className="w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center flex-shrink-0"
+                  style={{ borderColor: `${GOLD}40`, background: '#050505' }}>
+                  <img src="/images/zeya/logo.png" alt="ZC"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none'
-                      e.target.parentElement.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:${GOLD};font-weight:700;font-size:11px">SA</div>`
+                      e.target.parentElement.innerHTML = `<span style="font-family:'Playfair Display',serif;font-weight:700;font-size:10px;background:linear-gradient(135deg,${GOLD},#A6852A);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ZC</span>`
                     }}
                   />
                 </div>
-                <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>
-                  Senteurs d'Afrique
-                </p>
+                <p className="text-xs tracking-widest uppercase" style={{ color: GOLD }}>ZEYA Conciergerie</p>
               </div>
               <button
                 onClick={() => setMenuOpen(false)}
@@ -177,7 +161,6 @@ export default function SenteursNavbar() {
               </button>
             </div>
 
-            {/* Trait déco */}
             <div className="mb-6" style={{ height: '1px', background: `linear-gradient(90deg, ${GOLD}40, transparent)` }} />
 
             <nav className="flex flex-col gap-0 flex-1">
@@ -189,11 +172,7 @@ export default function SenteursNavbar() {
                   transition={{ delay: 0.05 * i, duration: 0.25 }}
                   onClick={() => scrollTo(link.href)}
                   className="font-heading text-2xl font-semibold text-left py-5 border-b"
-                  style={{
-                    color: 'rgba(255,255,255,0.85)',
-                    borderColor: `${GOLD}15`,
-                    fontFamily: "'Playfair Display', serif",
-                  }}
+                  style={{ color: 'rgba(255,255,255,0.85)', borderColor: `${GOLD}15`, fontFamily: "'Playfair Display', serif" }}
                 >
                   {link.label}
                 </motion.button>
