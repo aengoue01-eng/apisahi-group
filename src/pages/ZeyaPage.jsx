@@ -428,7 +428,7 @@ export default function ZeyaPage() {
                       {service.category}
                     </p>
                     <h3
-                      className="font-heading font-semibold text-white text-sm md:text-base mb-2 group-hover:text-gold transition-colors duration-200"
+                      className="font-heading font-semibold text-white text-sm md:text-base mb-2 transition-colors duration-200 group-hover:opacity-80"
                       style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       {service.name}

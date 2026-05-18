@@ -257,7 +257,7 @@ export default function LalouPage() {
       <LalouNavbar />
 
       {/* ══ HERO ══ */}
-      <section id="hero" style={{ height: '100vh' }}>
+      <section id="hero" className="lalou-swiper" style={{ height: '100vh' }}>
         <Swiper
           modules={[Autoplay, Pagination, Navigation, EffectFade]}
           effect="fade"

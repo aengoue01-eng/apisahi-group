@@ -164,7 +164,7 @@ export default function RituelPage() {
       <RituelNavbar />
 
       {/* ══ HERO ══ */}
-      <section id="hero" style={{ height: '100vh' }}>
+      <section id="hero" className="rituel-swiper" style={{ height: '100vh' }}>
         <Swiper modules={[Autoplay, Pagination, Navigation, EffectFade]}
           effect="fade" autoplay={{ delay: 5500, disableOnInteraction: false }}
           pagination={{ clickable: true }} navigation loop style={{ height: '100%' }}>

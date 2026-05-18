@@ -107,6 +107,24 @@
   color: #C9A84C !important;
 }
 
+/* Swiper — Rituel de Beauté */
+.rituel-swiper .swiper-pagination-bullet-active {
+  background: #D4548A !important;
+}
+.rituel-swiper .swiper-button-next,
+.rituel-swiper .swiper-button-prev {
+  color: #D4548A !important;
+}
+
+/* Swiper — LALOU Box Studio */
+.lalou-swiper .swiper-pagination-bullet-active {
+  background: #fcc581 !important;
+}
+.lalou-swiper .swiper-button-next,
+.lalou-swiper .swiper-button-prev {
+  color: #fcc581 !important;
+}
+
 /* Flip card 3D */
 .flip-card {
   perspective: 1000px;
